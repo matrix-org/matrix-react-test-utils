@@ -1,18 +1,6 @@
 import ReactTestUtils from 'react-dom/test-utils';
 
 /**
- * Wrapper around window.requestAnimationFrame that returns a promise
- * @private
- */
-function _waitForFrame() {
-    return new Promise((resolve, reject) => {
-        window.requestAnimationFrame(() => {
-            resolve();
-        });
-    });
-}
-
-/**
  * Helper for waitForRendered(DOM)?Component*
  *
  * `findComponent` should be a callback which returns a list of components which
@@ -27,22 +15,28 @@ function _waitForFrame() {
  */
 function _waitForRenderedComponent(attempts, findComponent) {
     if (attempts === undefined) {
-        // Let's start by assuming we'll only need to wait a single frame, and
-        // we can try increasing this if necessary.
-        attempts = 1;
-    } else if (attempts == 0) {
+        // make two attempts by default (one before waiting, and one after)
+        attempts = 2;
+    }
+
+    const result = findComponent();
+    if (result.length > 0) {
+        return Promise.resolve(result[0]);
+    }
+
+    attempts = attempts-1;
+
+    if (attempts == 0) {
         return Promise.reject(new Error(
             "Gave up waiting for component",
         ));
     }
 
-    return _waitForFrame().then(() => {
-        const result = findComponent();
-        if (result.length > 0) {
-            return result[0];
-        } else {
-            return _waitForRenderedComponent(attempts-1, findComponent);
-        }
+    // wait 10ms, then try again
+    return new Promise((resolve, reject) => {
+        setTimeout(resolve, 10);
+    }).then(() => {
+        return _waitForRenderedComponent(attempts, findComponent);
     });
 }
 
