@@ -1,4 +1,4 @@
-## next release
+## 0.2.0
 
  - Add `waitForRenderedComponentWithType`
 
@@ -9,3 +9,4 @@
 ## 0.1.0
 
  - Initial release, with code taken from matrix-react-sdk
+ 
