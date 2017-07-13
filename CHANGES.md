@@ -1,3 +1,7 @@
+## 0.2.1
+
+ - Use `setTimeout` instead of `requestAnimationFrame` (which seemed unreliable)
+
 ## 0.2.0
 
  - Add `waitForRenderedComponentWithType`
