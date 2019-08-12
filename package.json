@@ -1,7 +1,7 @@
 {
   "name": "matrix-react-test-utils",
   "version": "0.2.1",
-  "description": "Utilities to help with testing React applications￼Edit",
+  "description": "Utilities to help with testing React applications",
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib --source-maps",
