@@ -1,6 +1,6 @@
 {
   "name": "matrix-react-test-utils",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Utilities to help with testing React applications",
   "main": "index.js",
   "scripts": {
